@@ -33,7 +33,7 @@ public class Management {
      *
      * @return The plugin pointer.
      */
-    public static JavaPlugin getPlugin (JavaPlugin plugin) {
+    public static JavaPlugin getPlugin () {
         return plugin;
     }
 
