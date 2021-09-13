@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>io.github.math0898</groupId>
     <artifactId>mc-mod-snipets</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.1</version>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
