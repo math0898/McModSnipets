@@ -70,6 +70,23 @@ public class ItemsHelper {
     }
 
     /**
+     * Creates an item with the option of making the item unbreakable.
+     *
+     * @param m The material for the item.
+     * @param i The number of the item.
+     * @param u Is the item unbreakable.
+     * @return The completed item.
+     */
+    public static ItemStack createItem (Material m, int i, boolean u) {
+        ItemStack r = new ItemStack(m, i);
+        ItemMeta meta = r.getItemMeta();
+        assert meta != null;
+        meta.setUnbreakable(u);
+        r.setItemMeta(meta);
+        return r;
+    }
+
+    /**
      * Creates a custom item of the given material and name. Used to create items in line.
      *
      * @param m The material for the item.
