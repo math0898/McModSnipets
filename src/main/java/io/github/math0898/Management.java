@@ -45,9 +45,9 @@ public class Management {
      */
     public static void console (String message, ChatColor color) {
         switch (color) {
-            case RED -> console(message, color, Level.SEVERE);
-            case YELLOW -> console(message, color, Level.WARNING);
-            default -> console(message, color, Level.INFO);
+            case RED: console(message, color, Level.SEVERE); break;
+            case YELLOW: console(message, color, Level.WARNING); break;
+            default: console(message, color, Level.INFO); break;
         }
     }
 
