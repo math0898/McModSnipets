@@ -30,7 +30,7 @@ public class LocationHelper {
      * @param delta The difference each distance coordinate must be within to be considered this location.
      * @return True if and only if the locations match.
      */
-    private boolean compare (Location l1, Location l2, double delta) {
+    public static boolean compare (Location l1, Location l2, double delta) {
         if (l1.getWorld() == null || l2.getWorld() == null) return false;
         if (!(Math.abs(l1.getX() - l2.getX()) < delta)) return false;
         if (!(Math.abs(l1.getY() - l2.getY()) < delta)) return false;
