@@ -6,7 +6,7 @@
 
     <groupId>io.github.math0898</groupId>
     <artifactId>mc-mod-snipets</artifactId>
-    <version>1.4.2</version>
+    <version>1.5.1</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

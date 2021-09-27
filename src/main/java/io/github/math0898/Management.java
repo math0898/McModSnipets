@@ -1,8 +1,13 @@
 package io.github.math0898;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.logging.Level;
 
 /**
@@ -60,5 +65,23 @@ public class Management {
      */
     public static void console (String message, ChatColor color, Level lvl) {
         plugin.getLogger().log(lvl, color + message);
+    }
+
+    /**
+     * Returns the version of the plugin as read from plugin.yml
+     *
+     * @return The string version of the plugin.
+     */
+    public static String getVersion () {
+        FileConfiguration spigotYaml = new YamlConfiguration();
+        InputStream inputStream = getPlugin().getResource("plugin.yml");
+        if (inputStream == null) return ChatColor.RED + "ERROR";
+        Reader reader = new InputStreamReader(inputStream);
+        try {
+            spigotYaml.load(reader);
+            return spigotYaml.getString("version", ChatColor.RED + "ERROR");
+        } catch (Exception exception) {
+            return ChatColor.RED + "ERROR";
+        }
     }
 }
