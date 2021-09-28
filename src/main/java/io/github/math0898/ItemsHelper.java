@@ -1,5 +1,6 @@
 package io.github.math0898;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -80,6 +81,8 @@ public class ItemsHelper {
     public static ItemStack createItem (Material m, int i, boolean u) {
         ItemStack r = new ItemStack(m, i);
         ItemMeta meta = r.getItemMeta();
+        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(r.getType());
+        assert meta != null;
         meta.setUnbreakable(u);
         r.setItemMeta(meta);
         return r;
@@ -106,6 +109,8 @@ public class ItemsHelper {
     public static ItemStack createItem(Material m, int i, String n, String[] lines) {
         ItemStack r = new ItemStack(m, i);
         ItemMeta meta = r.getItemMeta();
+        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(r.getType());
+        assert meta != null;
         setLore(meta, lines);
         meta.setDisplayName(n);
         meta.setUnbreakable(true);
@@ -126,6 +131,8 @@ public class ItemsHelper {
     public static ItemStack createItem(Material m, int i, String n, String[] lines, AttributeModifier[] attributes) {
         ItemStack item = createItem(m, i, n, lines);
         ItemMeta meta = item.getItemMeta();
+        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
+        assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
         item.setItemMeta(meta);
         return item;
@@ -145,6 +152,8 @@ public class ItemsHelper {
         if (m != Material.LEATHER_BOOTS && m != Material.LEATHER_LEGGINGS && m != Material.LEATHER_CHESTPLATE && m != Material.LEATHER_HELMET) return null;
         ItemStack item = createItem(m, 1, n, lines);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+        if (meta == null) meta = (LeatherArmorMeta) Bukkit.getItemFactory().getItemMeta(item.getType());
+        assert meta != null;
         meta.setColor(Color.fromRGB(r, g, b));
         item.setItemMeta(meta);
         return item;
@@ -165,6 +174,8 @@ public class ItemsHelper {
         ItemStack item = createLeatherArmor(m, n, lines, r, g, b);
         if (item == null) return null;
         ItemMeta meta = item.getItemMeta();
+        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
+        assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
         item.setItemMeta(meta);
         return item;
