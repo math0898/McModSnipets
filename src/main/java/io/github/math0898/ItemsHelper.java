@@ -80,7 +80,6 @@ public class ItemsHelper {
     public static ItemStack createItem (Material m, int i, boolean u) {
         ItemStack r = new ItemStack(m, i);
         ItemMeta meta = r.getItemMeta();
-        assert meta != null;
         meta.setUnbreakable(u);
         r.setItemMeta(meta);
         return r;
@@ -107,7 +106,6 @@ public class ItemsHelper {
     public static ItemStack createItem(Material m, int i, String n, String[] lines) {
         ItemStack r = new ItemStack(m, i);
         ItemMeta meta = r.getItemMeta();
-        assert meta != null;
         setLore(meta, lines);
         meta.setDisplayName(n);
         meta.setUnbreakable(true);
@@ -128,7 +126,6 @@ public class ItemsHelper {
     public static ItemStack createItem(Material m, int i, String n, String[] lines, AttributeModifier[] attributes) {
         ItemStack item = createItem(m, i, n, lines);
         ItemMeta meta = item.getItemMeta();
-        assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
         item.setItemMeta(meta);
         return item;
@@ -148,7 +145,6 @@ public class ItemsHelper {
         if (m != Material.LEATHER_BOOTS && m != Material.LEATHER_LEGGINGS && m != Material.LEATHER_CHESTPLATE && m != Material.LEATHER_HELMET) return null;
         ItemStack item = createItem(m, 1, n, lines);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        assert meta != null;
         meta.setColor(Color.fromRGB(r, g, b));
         item.setItemMeta(meta);
         return item;
@@ -169,7 +165,6 @@ public class ItemsHelper {
         ItemStack item = createLeatherArmor(m, n, lines, r, g, b);
         if (item == null) return null;
         ItemMeta meta = item.getItemMeta();
-        assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
         item.setItemMeta(meta);
         return item;
