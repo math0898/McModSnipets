@@ -4,6 +4,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -79,6 +80,7 @@ public class ItemsHelper {
      */
     public static ItemStack createItem (Material m, int i, boolean u) {
         ItemStack r = new ItemStack(m, i);
+        r.addEnchantment(Enchantment.DURABILITY, 0);
         ItemMeta meta = r.getItemMeta();
         assert meta != null;
         meta.setUnbreakable(u);
@@ -106,6 +108,7 @@ public class ItemsHelper {
      */
     public static ItemStack createItem(Material m, int i, String n, String[] lines) {
         ItemStack r = new ItemStack(m, i);
+        r.addEnchantment(Enchantment.DURABILITY, 0);
         ItemMeta meta = r.getItemMeta();
         assert meta != null;
         setLore(meta, lines);
@@ -127,6 +130,7 @@ public class ItemsHelper {
      */
     public static ItemStack createItem(Material m, int i, String n, String[] lines, AttributeModifier[] attributes) {
         ItemStack item = createItem(m, i, n, lines);
+        item.addEnchantment(Enchantment.DURABILITY, 0);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
@@ -147,6 +151,7 @@ public class ItemsHelper {
     public static ItemStack createLeatherArmor(Material m, String n, String[] lines, int r, int g, int b) {
         if (m != Material.LEATHER_BOOTS && m != Material.LEATHER_LEGGINGS && m != Material.LEATHER_CHESTPLATE && m != Material.LEATHER_HELMET) return null;
         ItemStack item = createItem(m, 1, n, lines);
+        item.addEnchantment(Enchantment.DURABILITY, 0);
         LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
         assert meta != null;
         meta.setColor(Color.fromRGB(r, g, b));
@@ -168,6 +173,7 @@ public class ItemsHelper {
     public static ItemStack createLeatherArmor(Material m, String n, String[] lines, int r, int g, int b, AttributeModifier[] attributes) {
         ItemStack item = createLeatherArmor(m, n, lines, r, g, b);
         if (item == null) return null;
+        item.addEnchantment(Enchantment.DURABILITY, 0);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
