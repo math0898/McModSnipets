@@ -21,42 +21,42 @@ import java.util.UUID;
  */
 public class ItemsHelper {
 
-    /**
-     * Creates an AttributeModifier with a unique UUID
-     *
-     * @param a The attribute being modified.
-     * @param value The desired value.
-     * @param slot The slot this should apply to.
-     * @return The AttributeModifier with a unique UUID.
-     */
-    public static AttributeModifier attributeModifier(Attribute a, double value, EquipmentSlot slot) {
-        int mod = -1;
-        switch (a) {
-            case GENERIC_MAX_HEALTH: mod = 1; break;
-            case GENERIC_ARMOR: mod = 2; break;
-            case GENERIC_ARMOR_TOUGHNESS: mod = 3; break;
-            case GENERIC_ATTACK_DAMAGE: mod = 4; break;
-            case GENERIC_KNOCKBACK_RESISTANCE: mod = 5; break;
-            case GENERIC_MOVEMENT_SPEED: mod = 6; break;
-            case GENERIC_LUCK: mod = 7; break;
-            case HORSE_JUMP_STRENGTH: mod = 8; break;
-            case GENERIC_ATTACK_SPEED: mod = 9; break;
-            case GENERIC_ATTACK_KNOCKBACK: mod = 10; break;
-            case GENERIC_FLYING_SPEED: mod = 11; break;
-            case GENERIC_FOLLOW_RANGE: mod = 12; break;
-            case ZOMBIE_SPAWN_REINFORCEMENTS: mod = 13; break;
-        }
-        int slotN = -1;
-        switch (slot) {
-            case FEET: slotN = 1; break;
-            case LEGS: slotN = 2; break;
-            case CHEST: slotN = 3; break;
-            case HEAD: slotN = 4; break;
-            case HAND: slotN = 5; break;
-            case OFF_HAND: slotN = 6; break;
-        }
-        return new AttributeModifier(new UUID(slotN, mod), a.toString(), value, AttributeModifier.Operation.ADD_NUMBER, slot);
-    }
+//    /**
+//     * Creates an AttributeModifier with a unique UUID
+//     *
+//     * @param a The attribute being modified.
+//     * @param value The desired value.
+//     * @param slot The slot this should apply to.
+//     * @return The AttributeModifier with a unique UUID.
+//     */
+//    public static AttributeModifier attributeModifier(Attribute a, double value, EquipmentSlot slot) {
+//        int mod = -1;
+//        switch (a) {
+//            case GENERIC_MAX_HEALTH: mod = 1; break;
+//            case GENERIC_ARMOR: mod = 2; break;
+//            case GENERIC_ARMOR_TOUGHNESS: mod = 3; break;
+//            case GENERIC_ATTACK_DAMAGE: mod = 4; break;
+//            case GENERIC_KNOCKBACK_RESISTANCE: mod = 5; break;
+//            case GENERIC_MOVEMENT_SPEED: mod = 6; break;
+//            case GENERIC_LUCK: mod = 7; break;
+//            case HORSE_JUMP_STRENGTH: mod = 8; break;
+//            case GENERIC_ATTACK_SPEED: mod = 9; break;
+//            case GENERIC_ATTACK_KNOCKBACK: mod = 10; break;
+//            case GENERIC_FLYING_SPEED: mod = 11; break;
+//            case GENERIC_FOLLOW_RANGE: mod = 12; break;
+//            case ZOMBIE_SPAWN_REINFORCEMENTS: mod = 13; break;
+//        }
+//        int slotN = -1;
+//        switch (slot) {
+//            case FEET: slotN = 1; break;
+//            case LEGS: slotN = 2; break;
+//            case CHEST: slotN = 3; break;
+//            case HEAD: slotN = 4; break;
+//            case HAND: slotN = 5; break;
+//            case OFF_HAND: slotN = 6; break;
+//        }
+//        return new AttributeModifier(new UUID(slotN, mod), a.toString(), value, AttributeModifier.Operation.ADD_NUMBER, slot);
+//    }
 
     /**
      * Applies the given strings to the lore of the given meta.
@@ -108,8 +108,7 @@ public class ItemsHelper {
      */
     public static ItemStack createItem(Material m, int i, String n, String[] lines) {
         ItemStack r = new ItemStack(m, i);
-        ItemMeta meta = r.getItemMeta();
-        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(r.getType());
+        ItemMeta meta = Bukkit.getItemFactory().getItemMeta(m);
         assert meta != null;
         setLore(meta, lines);
         meta.setDisplayName(n);
@@ -118,25 +117,25 @@ public class ItemsHelper {
         return r;
     }
 
-    /**
-     * Creates a custom item of the given material, name, lore, and array of attribute modifiers. Used to create items
-     * in line. This method can significantly reduce scope.
-     *
-     * @param m The material for the item.
-     * @param i The number of items in the stack.
-     * @param n The name of the item.
-     * @param lines The lines of lore.
-     * @param attributes The attributes to be added to the item.
-     */
-    public static ItemStack createItem(Material m, int i, String n, String[] lines, AttributeModifier[] attributes) {
-        ItemStack item = createItem(m, i, n, lines);
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
-        assert meta != null;
-        for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
-        item.setItemMeta(meta);
-        return item;
-    }
+//    /**
+//     * Creates a custom item of the given material, name, lore, and array of attribute modifiers. Used to create items
+//     * in line. This method can significantly reduce scope.
+//     *
+//     * @param m The material for the item.
+//     * @param i The number of items in the stack.
+//     * @param n The name of the item.
+//     * @param lines The lines of lore.
+//     * @param attributes The attributes to be added to the item.
+//     */
+//    public static ItemStack createItem(Material m, int i, String n, String[] lines, AttributeModifier[] attributes) {
+//        ItemStack item = createItem(m, i, n, lines);
+//        ItemMeta meta = item.getItemMeta();
+//        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
+//        assert meta != null;
+//        for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
+//        item.setItemMeta(meta);
+//        return item;
+//    }
 
     /**
      * Creates a leather armor item with the given dyes. It's implied that each item stack will only have one item.
@@ -159,25 +158,25 @@ public class ItemsHelper {
         return item;
     }
 
-    /**
-     * Creates a leather armor item with the given dyes. This also handles the adding attributes to the leather armor.
-     *
-     * @param m The material for the item.
-     * @param n The name of the item.
-     * @param lines The lines of lore.
-     * @param r The red of the dye.
-     * @param g The green of the dye.
-     * @param b The blue of the dye.
-     * @param attributes The attributes to be added to the item.
-     */
-    public static ItemStack createLeatherArmor(Material m, String n, String[] lines, int r, int g, int b, AttributeModifier[] attributes) {
-        ItemStack item = createLeatherArmor(m, n, lines, r, g, b);
-        if (item == null) return null;
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
-        assert meta != null;
-        for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
-        item.setItemMeta(meta);
-        return item;
-    }
+//    /**
+//     * Creates a leather armor item with the given dyes. This also handles the adding attributes to the leather armor.
+//     *
+//     * @param m The material for the item.
+//     * @param n The name of the item.
+//     * @param lines The lines of lore.
+//     * @param r The red of the dye.
+//     * @param g The green of the dye.
+//     * @param b The blue of the dye.
+//     * @param attributes The attributes to be added to the item.
+//     */
+//    public static ItemStack createLeatherArmor(Material m, String n, String[] lines, int r, int g, int b, AttributeModifier[] attributes) {
+//        ItemStack item = createLeatherArmor(m, n, lines, r, g, b);
+//        if (item == null) return null;
+//        ItemMeta meta = item.getItemMeta();
+//        if (meta == null) meta = Bukkit.getItemFactory().getItemMeta(item.getType());
+//        assert meta != null;
+//        for (AttributeModifier a: attributes) meta.addAttributeModifier(Attribute.valueOf(a.getName()), a);
+//        item.setItemMeta(meta);
+//        return item;
+//    }
 }
